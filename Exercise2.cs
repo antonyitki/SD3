@@ -1,49 +1,79 @@
 ﻿using System;
-namespace Cofe
+namespace Ex
 {
-    class Program{
-        static void Main(string[] args){
-            Console.WriteLine("Enter numbers lenght: ");
-            int lenght = Convert.ToInt32(Console.ReadLine());
-
-            int sum = 0;
-            int input = 0;
-
-            for (int i = 0; i < lenght; ++i)
+    public class FloatNumbersWhileAdd{
+        private double sum;
+        public void Start()
+        {
+            WriteProgramInfo();
+            ReadInputAndSumNumbers();
+            ShowTotal();
+            ShowGrandTotal();
+        }
+        private void WriteProgramInfo()
+        {
+            Console.WriteLine("Price of the item: ");
+            Console.WriteLine("Write 0 to Finish\n");
+        }
+        private void ReadInputAndSumNumbers()
+        {
+            bool done = false;
+            while (!done)
             {
-                Console.WriteLine("Enter a number: ");
-                input = Convert.ToInt32(Console.ReadLine());
-
-                if (input >= 0)
+                double number = ReadInput();
+                if (number != 0)
                 {
-                    sum = sum + input;
+                    sum += number;
+                }
+                else
+                {
+                    done = true;
                 }
             }
-            Console.WriteLine("The sum of the positive numbers is: " + sum);
+        }
+        private double ReadInput()
+        {
+            Console.Write("Price: ");
+            double num = double.Parse(Console.ReadLine());
+            return num;
+        }
+        private void ShowTotal()
+        {
+            Console.Write("\nThe Subtotal is : $ " + sum);
+        }
+        private void ShowGrandTotal()
+        {
+            Console.WriteLine("\n\nEnter number of people: ");
+            int people = Convert.ToInt32(Console.ReadLine());
+            if(people >= 1 && people <= 3)
+            {
+                sum = 1.05 * sum;
+            }
+            if (people >=4  && people <= 10)
+            {
+                sum = 1.10 * sum;
+            }
+            if (people > 10)
+            {
+                sum = 1.20 * sum;
+            }
 
 
+            Console.Write("\nThe TOTAL amount is : $ " + sum * people);
+        }
 
+    }
+    class Program
+    {
+        static void Main()
+        {
+            Console.WriteLine("Costa\n@ UOR\n\n#######################################");
+            FloatNumbersWhileAdd fnwa = new FloatNumbersWhileAdd();
+            fnwa.Start();
 
-
-
-
-
+            
 
         }
     }
-
-    class ServiceCharge {
-        //3 if statement
-
-
-    }
-
-
-    class tip{
-
-
-
-    }
-
 
 }
