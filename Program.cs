@@ -1,63 +1,31 @@
 ﻿using System;
 
-namespace Coursework_1{
-    class Program{
-        static void Main(string[] args){
+namespace University
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            University[] universities = new University[3]; //3 is the number of deprtments
 
-            //Validate and store all client input values 
-            string FirstName = String.Empty;
-            while (Validator.FieldIsEmpty(FirstName))
+            universities[0] = new Art();
+            universities[1] = new Science();
+            universities[2] = new Social();
+
+            // double loop for each departement and each student in the department
+            foreach (University university in universities)
             {
-                Console.WriteLine("Enter the student first name: ");
-                FirstName = Console.ReadLine();
+                Console.WriteLine("#" + university.GetType().Name + ":");
+                foreach (Student student in university.Students)
+                {
+                    Console.WriteLine("   " + student.GetType().Name);
+                    Console.WriteLine("      -------->>>      Students in " + university.GetType().Name);
+                }
             }
-
-            string LastName = String.Empty;
-            while (Validator.FieldIsEmpty(LastName))
-            {
-                Console.WriteLine("Please enter the student last name: ");
-                LastName = Console.ReadLine();
-            }
-
-            string IDStudent = String.Empty;
-            while (Validator.FieldIsEmpty(IDStudent) || !Validator.IDStudentValid(IDStudent))
-            {
-                Console.WriteLine("Enter the student ID: ");
-                IDStudent = Console.ReadLine();
-            }
-
-            string Email = String.Empty;
-            while (Validator.FieldIsEmpty(Email) || !Validator.EmailIsValid(Email))
-            {
-                Console.WriteLine("Please enter the student email: ");
-                Email = Console.ReadLine();
-            }
-
-            string Address = String.Empty;
-            while (Validator.FieldIsEmpty(Address))
-            {
-                Console.WriteLine("Enter the student address: ");
-                Address = Console.ReadLine();
-            }
-
-            string PhoneNumber = String.Empty;
-            while (Validator.FieldIsEmpty(PhoneNumber) || !Validator.PhoneNumberIsValid(PhoneNumber))
-            {
-                Console.WriteLine("Please enter the student phone number: ");
-                PhoneNumber = Console.ReadLine();
-            }
-
-            //At this point we have all the required information, we can create our object! 
-            Student NewStudent = new Student(FirstName,
-                                          LastName,
-                                          IDStudent,
-                                          Email,
-                                          Address,
-                                          PhoneNumber);
-            Console.WriteLine("\n\n###############################################");
-            //Display the client with the ToString method 
-            Console.Write(NewStudent.ToString());
-        }  
+            Console.ReadKey(); //program keep running until key entered
+        }
     }
 }
+//Factory method parrern from creational design patterns applied to university. Students can be added 
+//in Departments.cs and in main is possible add more departments.
 
